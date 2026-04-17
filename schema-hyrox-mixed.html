@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trainingsschema Hyrox Mixed Doubles — 28 nov 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f4f2;--s1:#fff;--s2:#f0eeeb;--s3:#e8e5e0;
+  --border:#ddd9d3;--accent:#16803c;--accent2:#7c3aed;
+  --text:#1a1815;--text2:#4a4540;--text3:#8a837a;
+  --green:#16803c;--red:#b91c1c;--yellow:#a16207;--orange:#c2410c;
+  --mono:'IBM Plex Mono',monospace;--body:'Plus Jakarta Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14px;min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+header{background:var(--s1);border-bottom:2px solid var(--accent);padding:14px 20px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:50;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.hex{width:36px;height:36px;flex-shrink:0;background:var(--accent);clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:10px;color:#fff;}
+.hdr-info{flex:1;}
+.hdr-title{font-weight:800;font-size:15px;}
+.hdr-sub{font-family:var(--mono);font-size:9px;color:var(--accent);margin-top:1px;}
+
+.tabs{display:flex;background:var(--s1);border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 16px;position:sticky;top:64px;z-index:40;}
+.tab{padding:14px 16px;font-size:12px;font-weight:600;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;touch-action:manipulation;}
+.tab.on{color:var(--accent);border-bottom-color:var(--accent);}
+
+.page{display:none;padding:20px 16px 80px;max-width:1100px;margin:0 auto;}
+.page.on{display:block;}
+
+/* SECTION HEADERS */
+.csec{display:flex;align-items:center;justify-content:space-between;padding:10px 0;cursor:pointer;user-select:none;border-bottom:1px solid var(--border);margin:20px 0 0;touch-action:manipulation;}
+.csec-title{font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);}
+.csec-chev{font-family:var(--mono);font-size:10px;color:var(--text3);transition:transform 0.2s;}
+.csec-chev.open{transform:rotate(90deg);color:var(--accent);}
+.cbody{display:none;padding:14px 0 4px;}
+.cbody.open{display:block;}
+
+/* GOALS */
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:500px){.goals{grid-template-columns:1fr;}}
+.goal{background:var(--s1);border:1px solid var(--border);border-top:2px solid var(--accent);border-radius:6px;padding:14px 16px;}
+.goal.g2{border-top-color:var(--accent2);}
+.goal-label{font-family:var(--mono);font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:5px;}
+.goal-val{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--accent);line-height:1;}
+.goal.g2 .goal-val{color:var(--accent2);}
+.goal-sub{font-size:12px;color:var(--text2);margin-top:5px;line-height:1.4;}
+
+/* WARNING BOX */
+.warn-box{background:rgba(194,65,12,0.05);border:1px solid rgba(194,65,12,0.25);border-left:3px solid var(--orange);border-radius:6px;padding:12px 16px;margin-bottom:12px;}
+.warn-title{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:6px;font-weight:700;}
+.warn-body{font-size:12px;color:var(--text2);line-height:1.6;}
+.warn-body b{color:var(--text);}
+
+/* PHASE TIMELINE */
+.timeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:8px;}
+.phase{padding:14px 16px;border-right:1px solid var(--border);}
+.phase:last-child{border-right:none;}
+.phase-num{font-family:var(--mono);font-size:8px;letter-spacing:2px;color:var(--text3);margin-bottom:4px;}
+.phase-name{font-weight:800;font-size:13px;margin-bottom:3px;}
+.phase-dates{font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:6px;}
+.phase-focus{font-size:11px;color:var(--text2);line-height:1.5;}
+.phase-tag{display:inline-block;margin-top:6px;padding:2px 7px;border-radius:2px;font-family:var(--mono);font-size:8px;font-weight:600;}
+.p1{background:rgba(22,128,60,0.03);}
+.p1 .phase-name{color:var(--accent);}
+.p1 .phase-tag{background:rgba(22,128,60,0.1);color:var(--accent);border:1px solid rgba(22,128,60,0.2);}
+.p2{background:rgba(124,58,237,0.03);}
+.p2 .phase-name{color:var(--accent2);}
+.p2 .phase-tag{background:rgba(124,58,237,0.1);color:var(--accent2);border:1px solid rgba(124,58,237,0.2);}
+.p3{background:rgba(22,128,60,0.03);}
+.p3 .phase-name{color:var(--green);}
+.p3 .phase-tag{background:rgba(22,128,60,0.1);color:var(--green);border:1px solid rgba(22,128,60,0.2);}
+.p4{background:rgba(161,98,7,0.03);}
+.p4 .phase-name{color:var(--yellow);}
+.p4 .phase-tag{background:rgba(161,98,7,0.1);color:var(--yellow);border:1px solid rgba(161,98,7,0.2);}
+
+/* TRACKER */
+.tracker-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;padding:10px 14px;background:var(--s1);border:1px solid var(--border);border-radius:8px;}
+.tracker-label{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;}
+.saved-chip{font-family:var(--mono);font-size:9px;padding:2px 8px;border-radius:10px;background:rgba(22,128,60,0.1);color:var(--green);border:1px solid rgba(22,128,60,0.25);opacity:0;transition:opacity 0.3s;margin-left:auto;}
+.saved-chip.show{opacity:1;}
+.tbtn{padding:5px 12px;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--s1);color:var(--text2);transition:all 0.15s;touch-action:manipulation;}
+.tbtn:hover{border-color:var(--accent);color:var(--accent);}
+.tbtn.danger{color:var(--red);border-color:rgba(185,28,28,0.3);}
+
+.t-progress-wrap{margin-bottom:12px;padding:12px 14px;background:var(--s2);border-radius:8px;border:1px solid var(--border);}
+.t-progress-meta{display:flex;justify-content:space-between;margin-bottom:5px;}
+.t-progress-label{font-family:var(--mono);font-size:9px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;}
+.t-progress-pct{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent);}
+.t-bar-bg{background:var(--border);border-radius:3px;height:6px;overflow:hidden;}
+.t-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transition:width 0.4s;}
+
+.t-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:8px;margin-bottom:16px;}
+.t-stat{background:var(--s1);border:1px solid var(--border);border-radius:6px;padding:10px;text-align:center;}
+.t-stat-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);}
+.t-stat-label{font-family:var(--mono);font-size:8px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+
+/* WEEK CARDS */
+.t-week{background:var(--s1);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;overflow:hidden;}
+.t-week-header{padding:11px 14px;background:var(--s2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;touch-action:manipulation;}
+.t-week-header:hover{background:var(--s3);}
+.t-week-num{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--text3);flex-shrink:0;}
+.t-week-title{font-weight:700;font-size:12px;flex:1;}
+.t-week-dates{font-family:var(--mono);font-size:9px;color:var(--text3);flex-shrink:0;}
+.t-week-cnt{font-family:var(--mono);font-size:10px;color:var(--text3);}
+.t-week-done{font-family:var(--mono);font-size:9px;padding:2px 8px;border-radius:10px;background:rgba(22,128,60,0.1);color:var(--green);border:1px solid rgba(22,128,60,0.25);}
+.t-week-chev{font-family:var(--mono);font-size:10px;color:var(--text3);transition:transform 0.2s;margin-left:auto;flex-shrink:0;}
+.t-week-chev.open{transform:rotate(90deg);}
+.t-week-phase{font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:3px;font-weight:600;flex-shrink:0;}
+.t-week-body{display:none;}
+.t-week-body.open{display:block;}
+
+/* SESSIONS */
+.t-session-workout{background:rgba(0,0,0,0.012);border-top:1px solid var(--border);}
+.t-session-workout .t-blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;padding:10px 14px 4px;}
+.t-session{border-bottom:1px solid var(--border);}
+.t-session:last-child{border-bottom:none;}
+.t-session-header{padding:10px 14px;display:flex;align-items:center;gap:8px;}
+.t-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.t-dot-run{background:var(--accent);}
+.t-dot-kracht{background:var(--accent2);}
+.t-dot-mob{background:var(--green);}
+.t-dot-race{background:var(--yellow);}
+.t-session-when{font-family:var(--mono);font-size:9px;color:var(--text3);width:130px;flex-shrink:0;line-height:1.4;}
+.t-session-name{font-weight:600;font-size:12px;flex:1;}
+.t-feel-label{font-family:var(--mono);font-size:9px;color:var(--text3);flex-shrink:0;}
+.t-stars{display:flex;gap:2px;flex-shrink:0;}
+.t-star{font-size:16px;cursor:pointer;color:var(--border);transition:color 0.1s;line-height:1;user-select:none;touch-action:manipulation;}
+.t-star.on{color:var(--accent2);}
+.t-expand-btn{padding:3px 9px;border-radius:4px;font-family:var(--mono);font-size:9px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text3);transition:all 0.12s;flex-shrink:0;touch-action:manipulation;}
+.t-expand-btn:hover{border-color:var(--accent);color:var(--accent);}
+.t-check{width:22px;height:22px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all 0.15s;touch-action:manipulation;}
+.t-check:hover{border-color:var(--green);}
+.t-check.done{background:var(--green);border-color:var(--green);}
+.t-check.done::after{content:'✓';color:#fff;font-size:13px;font-weight:700;}
+
+/* SESSION DETAIL */
+.t-session-workout{padding:10px 14px 4px 14px;background:rgba(0,0,0,0.008);}
+.t-session-workout .t-blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-bottom:0;}
+  .t-detail{display:none;padding:12px 14px 16px 30px;background:rgba(0,0,0,0.012);border-top:1px solid var(--border);}
+.t-detail.open{display:block;}
+.t-blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-bottom:10px;}
+.t-block{background:var(--s1);border:1px solid var(--border);border-radius:6px;padding:10px 12px;border-left:3px solid var(--border);}
+.t-block.wu{border-left-color:var(--accent2);}
+.t-block.main{border-left-color:var(--accent);}
+.t-block.cd{border-left-color:var(--green);}
+.t-block.kb{border-left-color:var(--yellow);}
+.t-block.warn{border-left-color:var(--orange);}
+.t-block-label{font-family:var(--mono);font-size:7px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:5px;}
+.t-block ul{list-style:none;padding:0;}
+.t-block li{font-size:11px;color:var(--text2);padding:5px 0;line-height:1.45;border-bottom:1px solid rgba(0,0,0,0.04);display:flex;align-items:center;gap:6px;}
+.t-block li:last-child{border-bottom:none;}
+.li-inp-row{display:flex;align-items:center;gap:6px;justify-content:space-between;}
+.li-name{flex:1;font-size:11px;color:var(--text2);}
+.li-display{font-family:var(--mono);font-size:11px;color:var(--text3);cursor:pointer;padding:2px 6px;border-radius:3px;border:1px solid var(--border);background:var(--s2);white-space:nowrap;min-width:36px;text-align:right;}
+.li-display:hover{border-color:var(--accent);}
+.li-display.filled{color:var(--accent);border-color:rgba(22,128,60,0.3);background:rgba(22,128,60,0.05);}
+.li-edit-wrap{display:flex;align-items:center;gap:4px;flex-shrink:0;}
+.li-inp{font-family:var(--mono);font-size:11px;width:64px;padding:2px 6px;border:1px solid var(--accent);border-radius:3px;outline:none;background:var(--s1);color:var(--text);text-align:right;}
+.li-unit{font-size:9px;color:var(--text3);}
+.li-ok{font-size:11px;color:var(--accent);cursor:pointer;font-weight:700;padding:2px 4px;}
+.t-inputs-title{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin:10px 0 6px;display:flex;align-items:center;gap:8px;}
+.t-inputs-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.t-inputs{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:10px;}
+.t-input-wrap{display:flex;flex-direction:column;gap:3px;}
+.t-input-label{font-family:var(--mono);font-size:9px;color:var(--text3);}
+.t-input{font-family:var(--mono);font-size:12px;border:1px solid var(--border);border-radius:4px;padding:5px 8px;background:var(--s2);color:var(--text);outline:none;transition:border-color 0.15s;}
+.t-input:focus{border-color:var(--accent);background:var(--s1);}
+.t-input::placeholder{color:var(--text3);}
+.t-notes{width:100%;min-height:55px;border:1px solid var(--border);border-radius:4px;padding:8px 10px;font-family:var(--body);font-size:12px;color:var(--text);background:var(--s2);outline:none;resize:vertical;line-height:1.5;}
+.t-notes:focus{border-color:var(--accent);background:var(--s1);}
+.t-notes::placeholder{color:var(--text3);}
+
+/* KRACHT INFO */
+.kd-block{background:var(--s1);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:8px;}
+.kd-summary{padding:12px 16px;cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;touch-action:manipulation;}
+.kd-summary:hover{background:var(--s2);}
+.kd-summary-title{font-family:var(--mono);font-size:11px;color:var(--accent2);font-weight:500;flex:1;}
+.kd-chev{font-family:var(--mono);font-size:9px;color:var(--text3);transition:transform 0.2s;}
+.kd-chev.open{transform:rotate(90deg);}
+.kd-body{display:none;padding:14px 16px;border-top:1px solid var(--border);background:rgba(0,0,0,0.01);}
+.kd-body.open{display:block;}
+.kd-intro{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:12px;padding:8px 12px;background:rgba(124,58,237,0.04);border-left:2px solid var(--accent2);border-radius:4px;}
+.ex-table{width:100%;border-collapse:collapse;}
+.ex-table thead th{font-family:var(--mono);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);padding:6px 8px;text-align:left;background:rgba(0,0,0,0.02);border-bottom:1px solid var(--border);}
+.ex-table tbody td{padding:7px 8px;font-size:12px;border-bottom:1px solid rgba(0,0,0,0.05);vertical-align:top;line-height:1.4;color:var(--text2);}
+.ex-table tbody td:first-child{font-weight:600;color:var(--text);}
+.ex-table tbody tr:last-child td{border-bottom:none;}
+.ex-note{font-family:var(--mono);font-size:9px;color:var(--orange);margin-top:6px;padding:6px 10px;background:rgba(194,65,12,0.05);border-radius:4px;border-left:2px solid var(--orange);}
+
+/* MOB ROUTINE */
+.mob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;}
+.mob-card{background:var(--s1);border:1px solid var(--border);border-radius:6px;padding:12px 14px;border-left:3px solid var(--green);}
+.mob-title{font-weight:700;font-size:12px;margin-bottom:6px;color:var(--green);}
+.mob-list{list-style:none;padding:0;}
+.mob-list li{font-size:11px;color:var(--text2);padding:2px 0 2px 12px;position:relative;line-height:1.45;}
+.mob-list li::before{content:'–';position:absolute;left:0;color:var(--text3);}
+
+/* RACE INFO */
+.race-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;}
+.race-card{background:var(--s1);border:1px solid var(--border);border-radius:6px;padding:14px 16px;border-left:3px solid var(--yellow);}
+.race-card-title{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--yellow);margin-bottom:6px;}
+.race-card-body{font-size:12px;color:var(--text2);line-height:1.6;}
+.race-card-body b{color:var(--text);}
+
+
+  .li-check{width:16px;height:16px;border:1.5px solid var(--border);border-radius:3px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.12s;touch-action:manipulation;}
+  .li-check:hover{border-color:var(--green);}
+  .li-check.done{background:var(--green);border-color:var(--green);}
+  .li-check.done::after{content:'✓';color:#fff;font-size:10px;font-weight:700;line-height:1;}
+  .t-block li.li-done .li-name{text-decoration:line-through;color:var(--text3);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hex">HM</div>
+  <div class="hdr-info">
+    <div class="hdr-title">Trainingsschema — Hyrox Mixed Doubles</div>
+    <div class="hdr-sub">Start 8 jun 2026 · Race 28 nov 2026 · 24 weken</div>
+  </div>
+</header>
+
+<div class="tabs">
+  <div class="tab on" onclick="showPage('schema',this)">Trainingsschema</div>
+  <div class="tab" onclick="showPage('kracht',this)">Krachtsessies</div>
+  <div class="tab" onclick="showPage('mobiliteit',this)">Dagelijks protocol</div>
+  <div class="tab" onclick="showPage('race',this)">Race info</div>
+</div>
+
+<!-- ═══ TRAININGSSCHEMA ═══ -->
+<div id="schema" class="page on">
+
+  <!-- WAARSCHUWING -->
+  <div class="warn-box">
+    <div class="warn-title">⚠ Belangrijk — post partum protocol</div>
+    <div class="warn-body">Er zijn nog bekkenbodem- en rugklachten. <b>De eerste 6 weken zijn geen impact-trainingen</b> — alleen wandelen, mobiliteit en lichte kracht. Schreenklachten worden voorkomen met de run/walk methode: nooit te snel opbouwen, altijd twee rustdagen tussen loopsessies. Bij twijfel: fysiotherapeut raadplegen vóór start week 3.</div>
+  </div>
+
+  <!-- DOELEN -->
+  <div class="csec" onclick="toggleSec('s-doelen','c-doelen')">
+    <span class="csec-title">Doelen</span>
+    <span class="csec-chev open" id="c-doelen">▶</span>
+  </div>
+  <div class="cbody open" id="s-doelen">
+    <div class="goals">
+      <div class="goal">
+        <div class="goal-label">Race doel</div>
+        <div class="goal-val">28 nov</div>
+        <div class="goal-sub">Hyrox Mixed Doubles · Plezier + finishen · Looptempo 5:00–6:00/km · Stations eerlijk verdeeld</div>
+      </div>
+      <div class="goal g2">
+        <div class="goal-label">Opbouwdoel</div>
+        <div class="goal-val">Blessurevrij</div>
+        <div class="goal-sub">24 weken geleidelijk opbouwen · Schenen beschermen via run/walk · Bekkenbodem respecteren eerste 6 weken</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FASESTRUCTUUR -->
+  <div class="csec" onclick="toggleSec('s-fases','c-fases')">
+    <span class="csec-title">Fasestructuur</span>
+    <span class="csec-chev" id="c-fases">▶</span>
+  </div>
+  <div class="cbody" id="s-fases">
+    <div class="timeline">
+      <div class="phase p1">
+        <div class="phase-num">Fase 1 · 6 weken</div>
+        <div class="phase-name">Fundament</div>
+        <div class="phase-dates">8 jun — 19 jul</div>
+        <div class="phase-focus">Geen impact. Wandelen, mobiliteit, lichte kracht. Bekkenbodem en rug herstellen. Gewenning aan routine.</div>
+        <div class="phase-tag">Geen lopen</div>
+      </div>
+      <div class="phase p2">
+        <div class="phase-num">Fase 2 · 8 weken</div>
+        <div class="phase-name">Run/Walk Opbouw</div>
+        <div class="phase-dates">20 jul — 13 sep</div>
+        <div class="phase-focus">Run/walk methode starten. Langzaam verhogen van loopminuten. Hyrox stations leren. Kracht opbouwen.</div>
+        <div class="phase-tag">Eerste stappen</div>
+      </div>
+      <div class="phase p3">
+        <div class="phase-num">Fase 3 · 6 weken</div>
+        <div class="phase-name">Loopopbouw</div>
+        <div class="phase-dates">14 sep — 25 okt</div>
+        <div class="phase-focus">Doorlopen zonder loopfases. Tempo naar 5:30–6:00/km. Hyrox combinaties oefenen. Uithoudingsvermogen opbouwen.</div>
+        <div class="phase-tag">Doorlopen</div>
+      </div>
+      <div class="phase p4">
+        <div class="phase-num">Fase 4 · 4 weken</div>
+        <div class="phase-name">Race Prep</div>
+        <div class="phase-dates">26 okt — 28 nov</div>
+        <div class="phase-focus">Race simulaties. Stations + lopen combineren. Taper laatste week. Race 28 november.</div>
+        <div class="phase-tag">Race klaar</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRACKER -->
+  <div class="tracker-bar">
+    <span class="tracker-label">Voortgang</span>
+    <button class="tbtn" onclick="tExport()">📥 Export</button>
+    <button class="tbtn" onclick="document.getElementById('t-imp').click()">📤 Import</button>
+    <input type="file" id="t-imp" accept=".json" style="display:none" onchange="tImport(event)">
+    <button class="tbtn danger" onclick="if(confirm('Wis alle data?')){localStorage.removeItem('hyrox_mixed');tRender();}">Wis</button>
+    <span class="saved-chip" id="t-saved">Opgeslagen ✓</span>
+  </div>
+
+  <div class="t-progress-wrap">
+    <div class="t-progress-meta">
+      <span class="t-progress-label">Seizoensvoortgang</span>
+      <span class="t-progress-pct" id="t-ppct">0%</span>
+    </div>
+    <div class="t-bar-bg"><div class="t-bar-fill" id="t-pfill" style="width:0%"></div></div>
+  </div>
+
+  <div class="t-stats">
+    <div class="t-stat"><div class="t-stat-val" id="t-sdone">0</div><div class="t-stat-label">Gedaan</div></div>
+    <div class="t-stat"><div class="t-stat-val" id="t-stot">0</div><div class="t-stat-label">Totaal</div></div>
+    <div class="t-stat"><div class="t-stat-val" id="t-sruns">0</div><div class="t-stat-label">Runs</div></div>
+    <div class="t-stat"><div class="t-stat-val" id="t-skracht">0</div><div class="t-stat-label">Kracht</div></div>
+    <div class="t-stat"><div class="t-stat-val" id="t-sstreak">0</div><div class="t-stat-label">Weken ✓</div></div>
+  </div>
+
+  <div id="t-weeks"></div>
+
+</div>
+
+<!-- ═══ KRACHTSESSIES ═══ -->
+<div id="kracht" class="page">
+  <div class="warn-box">
+    <div class="warn-title">⚠ Post partum kracht — altijd voorzichtig</div>
+    <div class="warn-body">Bekkenbodem eerst. <b>Geen zware belasting op de buik de eerste 6 weken.</b> Geen crunches, sit-ups of plank varianten totdat bekkenbodem stabiel is. Diepe buikademhaling (diafragma) is de basis van elke sessie.</div>
+  </div>
+
+  <div class="csec" onclick="toggleSec('k-a','kc-a')">
+    <span class="csec-title">Sessie A — Fundament (Fase 1, weken 1–6)</span>
+    <span class="csec-chev" id="kc-a">▶</span>
+  </div>
+  <div class="cbody" id="k-a">
+    <div class="kd-block">
+      <div class="kd-summary" onclick="toggleKD('kd-a1','kdchev-a1')">
+        <span class="kd-summary-title">🌱 Volledige sessie · 30–40 min · Thuis of gym</span>
+        <span class="kd-chev" id="kdchev-a1">▶</span>
+      </div>
+      <div class="kd-body" id="kd-a1">
+        <div class="kd-intro">Geen impact, geen buikbelasting. Alles low intensity. Doel: beweging gewenning + basissterkte opbouwen. Stop bij pijn of druk in de bekkenbodem.</div>
+        <table class="ex-table">
+          <thead><tr><th>Oefening</th><th>Sets × Reps</th><th>Instructie</th></tr></thead>
+          <tbody>
+            <tr><td>Diafragma-ademhaling</td><td>3 × 5 diepe ademhalingen</td><td>Plat op rug, handen op buik. Adem diep in — buik omhoog. Uitademen — buik zakt. Fundament van alles.</td></tr>
+            <tr><td>Glute Bridge</td><td>3 × 12</td><td>Op rug, knieën gebogen, voeten plat. Til heupen omhoog — houd 2 sec. Activeer billen, niet rug.</td></tr>
+            <tr><td>Clamshell (weerstandsband)</td><td>3 × 15/zij</td><td>Op zij liggen, knieën gebogen. Bovenste knie omhoog als een schelp. Gluteus medius activatie.</td></tr>
+            <tr><td>Wall Sit</td><td>3 × 20 sec</td><td>Rug tegen muur, knieën 90°. Houd vast. Bouw op naar 40 sec naarmate het sterker wordt.</td></tr>
+            <tr><td>Staande Hip Hinge (geen gewicht)</td><td>3 × 10</td><td>Voeten schouderbreedte, handen op heupen. Buig voorover vanuit heupen (niet rug). Basis voor RDL later.</td></tr>
+            <tr><td>Wandelstap Lunge (eigen gewicht)</td><td>2 × 8/been</td><td>Langzaam, gecontroleerd. Knie niet voorbij teen. Stop bij druk in bekkenbodem.</td></tr>
+            <tr><td>Bird Dog</td><td>3 × 8/kant</td><td>Op handen en knieën. Strek rechterarm + linkerbeen tegelijk. Rugstabilisatie zonder buikdruk.</td></tr>
+          </tbody>
+        </table>
+        <div class="ex-note">⚠ Stop direct bij pijn, druk of lekken in bekkenbodem. Dit is geen falen — het is luisteren naar je lichaam. Raadpleeg een bekkenfysiotherapeut als dit regelmatig voorkomt.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec" onclick="toggleSec('k-b','kc-b')">
+    <span class="csec-title">Sessie B — Opbouw (Fase 2, weken 7–14)</span>
+    <span class="csec-chev" id="kc-b">▶</span>
+  </div>
+  <div class="cbody" id="k-b">
+    <div class="kd-block">
+      <div class="kd-summary" onclick="toggleKD('kd-b1','kdchev-b1')">
+        <span class="kd-summary-title">💪 Volledige sessie · 40–50 min · Mix thuis/gym</span>
+        <span class="kd-chev" id="kdchev-b1">▶</span>
+      </div>
+      <div class="kd-body" id="kd-b1">
+        <div class="kd-intro">Lichte dumbbells introduceren. Hyrox-relevante bewegingen. Nog geen zware belasting — kwaliteit boven gewicht. Altijd beginnen met bekkenbodemcheck (2 min ademhaling).</div>
+        <table class="ex-table">
+          <thead><tr><th>Oefening</th><th>Sets × Reps</th><th>Instructie</th></tr></thead>
+          <tbody>
+            <tr><td>Goblet Squat (lichte dumbbell)</td><td>3 × 10</td><td>Dumbbell voor borst, voeten schouderbreedte+. Diep zakken, borst omhoog. Hyrox-specifieke beweging.</td></tr>
+            <tr><td>Romanian Deadlift (dumbbells)</td><td>3 × 10</td><td>Dumbbells langs benen, kantelen vanuit heupen. Hamstrings voelen de rek. Rug recht.</td></tr>
+            <tr><td>Dumbbell Row (1-arm)</td><td>3 × 10/arm</td><td>1 hand + knie op bank. Trek dumbbell naar heup. Rugkracht voor Hyrox stations.</td></tr>
+            <tr><td>Wallball Squat (licht gewicht)</td><td>3 × 8</td><td>Bal voor borst, squat diep, gooi bal omhoog bij opstaan. Start zonder te gooien als bekkenbodem dat aangeeft.</td></tr>
+            <tr><td>Reverse Lunge (dumbbells)</td><td>3 × 8/been</td><td>Stap achteruit, knie laag bij grond. Minder bekkenbodemdruk dan forward lunge.</td></tr>
+            <tr><td>Push-up (op knieën of vol)</td><td>3 × 8–12</td><td>Op knieën als vol te zwaar is. Borst naar grond, ellebogen 45°. Bovenlichaamkracht voor Hyrox.</td></tr>
+            <tr><td>Dead Bug</td><td>3 × 6/kant</td><td>Op rug, armen omhoog, knieën 90°. Laat arm + been langzaam zakken zonder rug te lichten. Core zonder buikdruk.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec" onclick="toggleSec('k-c','kc-c')">
+    <span class="csec-title">Sessie C — Hyrox Kracht (Fase 3–4, weken 15–24)</span>
+    <span class="csec-chev" id="kc-c">▶</span>
+  </div>
+  <div class="cbody" id="k-c">
+    <div class="kd-block">
+      <div class="kd-summary" onclick="toggleKD('kd-c1','kdchev-c1')">
+        <span class="kd-summary-title">🏋 Volledige sessie · 50–60 min · Gym aanbevolen</span>
+        <span class="kd-chev" id="kdchev-c1">▶</span>
+      </div>
+      <div class="kd-body" id="kd-c1">
+        <div class="kd-intro">Hyrox-specifieke kracht-uithouding. Hogere reps, kortere rust, gecombineerd met loopstukken. Doel: bekkenbodem is stabiel, kracht is opgebouwd, nu racecondition trainen.</div>
+        <table class="ex-table">
+          <thead><tr><th>Oefening</th><th>Sets × Reps</th><th>Hyrox koppeling</th></tr></thead>
+          <tbody>
+            <tr><td>Wallball 6kg → 8kg</td><td>4 × 10</td><td>Directe Hyrox station beweging. Squat + gooi, vang, squat. Koppeling benen en schouders.</td></tr>
+            <tr><td>KB Swing (licht)</td><td>4 × 15</td><td>Explosieve heupextensie. Posterieure keten — cruciaal voor loopsnelheid én Hyrox stations.</td></tr>
+            <tr><td>Goblet Squat (zwaarder)</td><td>4 × 12</td><td>Benen uithouding. Diep, langzaam neer, explosief omhoog.</td></tr>
+            <tr><td>Lungebag Carry (2× rondje)</td><td>3 × 20m</td><td>Farmer carry variant. Bovenlichaam stabilisatie + beenwerk gecombineerd.</td></tr>
+            <tr><td>Burpee broad jump</td><td>3 × 5</td><td>Hyrox burpee voorbereiding. Volledig neer, sprong vooruit. Controleer dat bekkenbodem dit aankan.</td></tr>
+            <tr><td>Push-up (vol)</td><td>3 × 10–15</td><td>Bovenlichaamkracht voor stations.</td></tr>
+            <tr><td>Plank (als bekkenbodem stabiel)</td><td>3 × 20–30 sec</td><td>Alleen als er geen druk of lekken is bij plank. Anders: bird dog als alternatief.</td></tr>
+          </tbody>
+        </table>
+        <div class="ex-note">⚠ Burpee broad jumps en plank alleen uitvoeren als bekkenbodem dit zonder klachten aankan. Twijfel = niet doen.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DAGELIJKS PROTOCOL ═══ -->
+<div id="mobiliteit" class="page">
+  <div class="warn-box">
+    <div class="warn-title">5–10 min per dag, elke dag</div>
+    <div class="warn-body">Laagdrempelig en consistent. Doe het 's ochtends of voor het slapengaan. Het gaat om beweging inbouwen als gewoonte — niet om intensiteit.</div>
+  </div>
+
+  <div class="csec" onclick="toggleSec('m-ochtend','mc-o')">
+    <span class="csec-title">Ochtend routine · 5 min</span>
+    <span class="csec-chev open" id="mc-o">▶</span>
+  </div>
+  <div class="cbody open" id="m-ochtend">
+    <div class="mob-grid">
+      <div class="mob-card">
+        <div class="mob-title">Ademhaling + activatie</div>
+        <ul class="mob-list">
+          <li>90/90 ademhaling — 5 diepe ademhalingen op rug</li>
+          <li>Glute bridge — 10 reps langzaam</li>
+          <li>Cat-cow — 10 reps, ruggwervel per ruggwervel</li>
+          <li>Child's pose — 30 sec</li>
+        </ul>
+      </div>
+      <div class="mob-card">
+        <div class="mob-title">Heup + enkelmobiliteit</div>
+        <ul class="mob-list">
+          <li>Hip 90/90 stretch — 30 sec per kant</li>
+          <li>Seated ankle circles — 10 per richting</li>
+          <li>Couch stretch (heupbuiger) — 30 sec per kant</li>
+          <li>World's greatest stretch — 3 per kant</li>
+        </ul>
+      </div>
+      <div class="mob-card">
+        <div class="mob-title">Scheen bescherming (dagelijks)</div>
+        <ul class="mob-list">
+          <li>Tibialis raises — 3 × 15 (tegen muur, hakken op grond)</li>
+          <li>Calf raise (2 benen) — 2 × 15 langzaam</li>
+          <li>Enkelmobiliteit — voet tegen muur, knie over teen 10×</li>
+        </ul>
+      </div>
+      <div class="mob-card">
+        <div class="mob-title">Bekkenbodem dagelijks</div>
+        <ul class="mob-list">
+          <li>Kegels — 3 × 10 (aanspannen 5 sec, loslaten 10 sec)</li>
+          <li>Diafragma-ademhaling — 5 diepe ademhalingen</li>
+          <li>Stop direct bij druk of ongemak</li>
+          <li>Fysiotherapeut als klachten aanhouden</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec" onclick="toggleSec('m-bike','mc-b')">
+    <span class="csec-title">BikeErg + SkiErg — wanneer en hoe</span>
+    <span class="csec-chev open" id="mc-b">▶</span>
+  </div>
+  <div class="cbody open" id="m-bike">
+    <div class="mob-grid">
+      <div class="mob-card" style="border-left-color:var(--accent)">
+        <div class="mob-title" style="color:var(--accent)">Fase 1 (weken 1–6) — basis cardio</div>
+        <ul class="mob-list">
+          <li>BikeErg: elke weekendsessie, opbouwend 15→30 min</li>
+          <li>SkiErg: vanaf week 2, opbouwend 5→20 min</li>
+          <li>Hartslag: rustig onder 140 — kan praten = goed tempo</li>
+          <li>Geen impact = bekkenbodem en schenen volledig gespaard</li>
+          <li>SkiErg is direct een Hyrox station — dubbel nuttig</li>
+        </ul>
+      </div>
+      <div class="mob-card" style="border-left-color:var(--accent2)">
+        <div class="mob-title" style="color:var(--accent2)">Fase 2+ — fallback bij scheenpijn</div>
+        <ul class="mob-list">
+          <li>Schenen protesteren? Vervang de loopsessie 1:1</li>
+          <li>BikeErg: zelfde duur als de geplande run</li>
+          <li>SkiErg: 10–15 min als aanvulling</li>
+          <li>Geen concessie qua cardio — progressie blijft intact</li>
+          <li>Volgende week opnieuw proberen met lopen</li>
+        </ul>
+      </div>
+      <div class="mob-card" style="border-left-color:var(--green)">
+        <div class="mob-title" style="color:var(--green)">SkiErg techniek (Hyrox station)</div>
+        <ul class="mob-list">
+          <li>Begin met armen volledig uitgestrekt boven hoofd</li>
+          <li>Trek omlaag met armen én heupen — niet alleen armen</li>
+          <li>Heupen iets naar achteren bij de pull</li>
+          <li>Knieën licht gebogen, ritmische beweging</li>
+          <li>Rustig tempo is beter dan te snel en techniek verliezen</li>
+        </ul>
+      </div>
+      <div class="mob-card" style="border-left-color:var(--yellow)">
+        <div class="mob-title" style="color:var(--yellow)">BikeErg zones</div>
+        <ul class="mob-list">
+          <li>Zone 1 (herstel): hartslag &lt;130 — fietsen op gevoel</li>
+          <li>Zone 2 (aerobe basis): hartslag 130–145 — kan praten</li>
+          <li>Fase 1: altijd zone 1–2</li>
+          <li>Fase 2+: mag naar zone 2–3 als het goed voelt</li>
+          <li>Na zware krachtsessie: altijd zone 1</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="csec" onclick="toggleSec('m-scheen','mc-s')">
+    <span class="csec-title">Scheenprotocol — extra aandacht bij loopstart</span>
+    <span class="csec-chev" id="mc-s">▶</span>
+  </div>
+  <div class="cbody" id="m-scheen">
+    <div class="warn-box">
+      <div class="warn-title">Scheen pijn voorkomen</div>
+      <div class="warn-body"><b>Meest voorkomende fout:</b> te snel van nul naar lopen. De scheen heeft 4–6 weken nodig om zich aan te passen aan loopbelasting. Run/walk methode is niet optioneel — het is de bescherming. Bij eerste tekenen van scheenpijn: één week terug naar fase 1 protocol.</div>
+    </div>
+    <div class="mob-grid">
+      <div class="mob-card" style="border-left-color:var(--orange)">
+        <div class="mob-title" style="color:var(--orange)">Voor elke run</div>
+        <ul class="mob-list">
+          <li>Tibialis raises — 2 × 20</li>
+          <li>Calf raise eccentrisch — 2 × 10 (3 sec neer)</li>
+          <li>5 min wandelen voor eerste loopstap</li>
+        </ul>
+      </div>
+      <div class="mob-card" style="border-left-color:var(--orange)">
+        <div class="mob-title" style="color:var(--orange)">Na elke run</div>
+        <ul class="mob-list">
+          <li>Kuitstretch muur — 60 sec per been</li>
+          <li>Tibialis stretch (teen naar achteren) — 30 sec</li>
+          <li>Foam roll kuit — 60 sec per been</li>
+          <li>Scheenbot koelen bij gevoeligheid</li>
+        </ul>
+      </div>
+      <div class="mob-card" style="border-left-color:var(--red)">
+        <div class="mob-title" style="color:var(--red)">Stoplicht</div>
+        <ul class="mob-list">
+          <li>🟢 Geen pijn — ga door zoals gepland</li>
+          <li>🟡 Lichte gevoeligheid — tempo verlagen 15%</li>
+          <li>🟠 Pijn tijdens run — stop, wandel, extra protocol</li>
+          <li>🔴 Pijn aanhoudt 2+ dagen — terug naar fase 1</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RACE INFO ═══ -->
+<div id="race" class="page">
+  <div class="csec" onclick="toggleSec('r-hyrox','rc-h')">
+    <span class="csec-title">Hyrox Mixed Doubles — wat te verwachten</span>
+    <span class="csec-chev open" id="rc-h">▶</span>
+  </div>
+  <div class="cbody open" id="r-hyrox">
+    <div class="race-cards">
+      <div class="race-card">
+        <div class="race-card-title">Race structuur</div>
+        <div class="race-card-body"><b>8 rondes</b> van 1km lopen + 1 Hyrox station. Bij Mixed Doubles doen jullie de stations om beurten — eerlijk verdelen. Loopstukken doe je <b>naast elkaar</b>. Totaal: ~8km lopen + 8 stations.</div>
+      </div>
+      <div class="race-card">
+        <div class="race-card-title">Looptempo doel</div>
+        <div class="race-card-body">5:00–6:00/km per km. Bij 5:30/km = 44 min lopen. Stations gemiddeld 2–3 min = totaal ~60–70 min. <b>Rustig beginnen</b> — km 1 altijd op 6:00/km, pas daarna opbouwen.</div>
+      </div>
+      <div class="race-card">
+        <div class="race-card-title">Stations verdeling</div>
+        <div class="race-card-body">Elk station op herhaling. Strategie: <b>sterkere persoon</b> doet de zwaardere rondes (sled push/pull, farmers). <b>Gelijke verdeling</b> op wallball en ski-erg. Beslis van tevoren — niet improviseren.</div>
+      </div>
+      <div class="race-card">
+        <div class="race-card-title">De 8 Hyrox stations</div>
+        <div class="race-card-body">
+          1. SkiErg 1000m<br>
+          2. Sled Push 50m<br>
+          3. Sled Pull 50m<br>
+          4. Burpee Broad Jump 80m<br>
+          5. Rowing 1000m<br>
+          6. Farmers Carry 200m<br>
+          7. Sandbag Lunges 100m<br>
+          8. Wallball 75/100 reps
+        </div>
+      </div>
+      <div class="race-card">
+        <div class="race-card-title">Race dag checklist</div>
+        <div class="race-card-body">
+          ✓ Ontbijt 2–3 uur voor start<br>
+          ✓ Inschrijfnummer ophalen op tijd<br>
+          ✓ 15 min warm-up: joggen + strides<br>
+          ✓ Sporttape bij schenen als gewenst<br>
+          ✓ Waterfles bij start zone<br>
+          ✓ Strategie stations afgesproken<br>
+          ✓ Plezier maken is het doel
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────────────
+const WEEKS = [
+  // FASE 1: Fundament (weken 1-6, geen lopen)
+  {id:'w1',num:'Week 1',title:'Eerste beweging',dates:'8–14 jun',phase:'Fase 1',pc:'rgba(22,128,60,0.1)',ptc:'#16803c',
+    sessions:[
+      {id:'w1-wo',day:'Door de week',date:'10 jun',name:'Krachtsessie A',type:'kracht',
+        blocks:[
+          {l:'Warming-up · 5 min',t:'wu',i:['5 min rustig wandelen of BikeErg easy','Ademhaling — 5 diepe ademhalingen']},
+          {l:'Kracht · 30 min',t:'main',i:['Glute Bridge 3×12','Clamshell 3×15/zij','Wall Sit 3×20sec','Hip Hinge 3×10','Wandelstap Lunge 2×8/been','Bird Dog 3×8/kant']},
+          {l:'Cooling-down',t:'cd',i:['Cat-cow 10 reps','Child\'s pose 60sec','Bekkenbodem: 10 kegels']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'},{k:'bekkenbodem',l:'Bekkenbodem ok? (j/n)'}],kracht:[]},
+      {id:'w1-za',day:'Weekend',date:'13 jun',name:'BikeErg 15 min + wandeling',type:'mob',
+        blocks:[
+          {l:'BikeErg · 15 min',t:'main',i:['15 min rustig fietsen — weerstand laag','Hartslag onder 130','Geen impact, bekkenbodem check tussendoor','Stop bij ongemak']},
+          {l:'Wandeling · 15 min',t:'cd',i:['Direct na BikeErg — 15 min rustig wandelen','Totale sessie: 30 min cardio zonder impact']}],
+        run:[{k:'duur_bike',l:'BikeErg (min)'},{k:'gevoel',l:'Gevoel (1–5)'},{k:'bekkenbodem',l:'Bekkenbodem ok? (j/n)'}],kracht:[]}
+    ]},
+  {id:'w2',num:'Week 2',title:'Routine opbouwen',dates:'15–21 jun',phase:'Fase 1',pc:'rgba(22,128,60,0.1)',ptc:'#16803c',
+    sessions:[
+      {id:'w2-wo',day:'Door de week',date:'17 jun',name:'Krachtssessie A',type:'kracht',
+        blocks:[
+          {l:'Kracht · 35 min',t:'main',i:['Glute Bridge 3×15','Clamshell 3×15/zij (+band)','Wall Sit 3×25sec','Hip Hinge 3×12','Lunge 3×8/been','Bird Dog 3×10/kant']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]},
+      {id:'w2-za',day:'Weekend',date:'20 jun',name:'BikeErg 20 min + SkiErg intro',type:'mob',
+        blocks:[
+          {l:'BikeErg · 15 min',t:'main',i:['15 min easy fietsen','Hartslag onder 130','Eigen tempo']},
+          {l:'SkiErg · 5 min',t:'main',i:['5 min rustig SkiErg — lage weerstand','Dit is een Hyrox station — wennen aan de beweging','Trek met armen en core, niet met rug']},
+          {l:'Cooling-down',t:'cd',i:['5 min wandelen','Kuitstretch']}],
+        run:[{k:'duur_bike',l:'BikeErg (min)'},{k:'duur_ski',l:'SkiErg (min)'},{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]}
+    ]},
+  {id:'w3',num:'Week 3',title:'Kracht opbouwen',dates:'22–28 jun',phase:'Fase 1',pc:'rgba(22,128,60,0.1)',ptc:'#16803c',
+    sessions:[
+      {id:'w3-wo',day:'Door de week',date:'24 jun',name:'Krachtssessie A',type:'kracht',
+        blocks:[
+          {l:'Kracht · 35 min',t:'main',i:['Goblet Squat (licht) 3×10','Glute Bridge single-leg 3×10/been','RDL (geen gewicht) 3×10','Lunge 3×10/been','Dead Bug 3×6/kant']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'squat',l:'Goblet Squat gewicht'}]},
+      {id:'w3-za',day:'Weekend',date:'27 jun',name:'BikeErg 20 min + SkiErg 10 min',type:'mob',
+        blocks:[
+          {l:'BikeErg · 20 min',t:'main',i:['20 min easy — hartslag 120–135','Weerstand laag, ritme vinden']},
+          {l:'SkiErg · 10 min',t:'main',i:['10 min SkiErg rustig','Techniek: armen hoog starten, pull through','Hyrox station oefening — dit telt mee!']},
+          {l:'Cooling-down',t:'cd',i:['5 min wandelen','Schouder + rug stretch']}],
+        run:[{k:'duur_bike',l:'BikeErg (min)'},{k:'duur_ski',l:'SkiErg (min)'},{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]}
+    ]},
+  {id:'w4',num:'Week 4',title:'Lichte dumbells',dates:'29 jun – 5 jul',phase:'Fase 1',pc:'rgba(22,128,60,0.1)',ptc:'#16803c',
+    sessions:[
+      {id:'w4-wo',day:'Door de week',date:'1 jul',name:'Krachtssessie A+',type:'kracht',
+        blocks:[
+          {l:'Kracht · 40 min',t:'main',i:['Goblet Squat (dumbbell) 3×10','RDL (lichte dumbbells) 3×10','1-arm Row 3×10/arm','Push-up op knieën 3×8','Reverse Lunge 3×8/been']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'squat',l:'Squat gewicht (kg)'},{k:'rdl',l:'RDL gewicht (kg)'}]},
+      {id:'w4-za',day:'Weekend',date:'4 jul',name:'BikeErg 25 min + SkiErg 10 min',type:'mob',
+        blocks:[
+          {l:'BikeErg · 25 min',t:'main',i:['25 min — hartslag 130–140 laatste 10 min','Aerobe basis opbouwen zonder impact']},
+          {l:'SkiErg · 10 min',t:'main',i:['10 min iets constanter dan week 3','Probeer gelijk ritme vast te houden','Noteer gevoel en tempo']}],
+        run:[{k:'duur_bike',l:'BikeErg (min)'},{k:'duur_ski',l:'SkiErg (min)'},{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]}
+    ]},
+  {id:'w5',num:'Week 5',title:'Kracht + langere wandeling',dates:'6–12 jul',phase:'Fase 1',pc:'rgba(22,128,60,0.1)',ptc:'#16803c',
+    sessions:[
+      {id:'w5-wo',day:'Door de week',date:'8 jul',name:'Krachtssessie B intro',type:'kracht',
+        blocks:[
+          {l:'Sessie B intro · 40 min',t:'main',i:['Goblet Squat 4×10','RDL dumbbells 3×10','1-arm Row 3×10/arm','Wallball squat (geen gooi) 3×8','Reverse Lunge 3×10/been','Dead Bug 3×8/kant']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'squat',l:'Squat gewicht'},{k:'rdl',l:'RDL gewicht'}]},
+      {id:'w5-za',day:'Weekend',date:'11 jul',name:'BikeErg 30 min of SkiErg 20 min',type:'mob',
+        blocks:[
+          {l:'Keuze',t:'main',i:['Optie A: 30 min BikeErg — hartslag 130–145','Optie B: 20 min SkiErg steady + 10 min BikeErg cooldown','Kies op gevoel — bekkenbodem leidend']},
+          {l:'SkiErg techniek',t:'wb',i:['Armen volledig strekken boven hoofd','Pull door met hele lichaam — niet alleen armen','Heupen iets naar achter bij pull','Dit is exact de Hyrox beweging']}],
+        run:[{k:'duur_bike',l:'BikeErg (min)'},{k:'duur_ski',l:'SkiErg (min)'},{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]}
+    ]},
+  {id:'w6',num:'Week 6',title:'Afsluiting fase 1',dates:'13–19 jul',phase:'Fase 1',pc:'rgba(22,128,60,0.1)',ptc:'#16803c',
+    sessions:[
+      {id:'w6-wo',day:'Door de week',date:'15 jul',name:'Krachtssessie B',type:'kracht',
+        blocks:[
+          {l:'Sessie B · 45 min',t:'main',i:['Goblet Squat 4×12','RDL 4×10','1-arm Row 4×10/arm','Wallball (lichte gooi) 3×8','Push-up vol of op knieën 3×10','Reverse Lunge 3×10/been']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'squat',l:'Squat'},{k:'rdl',l:'RDL'},{k:'row',l:'Row'}]},
+      {id:'w6-za',day:'Weekend',date:'18 jul',name:'SkiErg 20 min + BikeErg 15 min',type:'mob',
+        blocks:[
+          {l:'SkiErg · 20 min',t:'main',i:['20 min steady SkiErg — hartslag 135–145','Dit is de langste SkiErg sessie tot nu','Klopt je aerobe basis al goed — straks ook bij lopen']},
+          {l:'BikeErg · 15 min cooldown',t:'cd',i:['15 min easy fietsen na SkiErg','Actief herstel','Klaar voor eerste run/walk volgende week!']}],
+        run:[{k:'duur_ski',l:'SkiErg (min)'},{k:'duur_bike',l:'BikeErg (min)'},{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]}
+    ]},
+
+  // FASE 2: Run/Walk (weken 7-14)
+  {id:'w7',num:'Week 7',title:'Eerste stappen — Run/Walk 1 min',dates:'20–26 jul',phase:'Fase 2',pc:'rgba(124,58,237,0.1)',ptc:'#7c3aed',
+    sessions:[
+      {id:'w7-wo',day:'Door de week',date:'22 jul',name:'Run/Walk + Kracht B',type:'run',
+        blocks:[
+          {l:'Warming-up · 5 min',t:'wu',i:['5 min rustig wandelen','Tibialis raises 2×15']},
+          {l:'Run/Walk · 20 min',t:'main',i:['1 min rustig lopen → 2 min wandelen','Herhaal 6–7× (totaal 20 min)','Looptempo: heel rustig, kan een gesprek voeren','Stop bij scheenpijn of bekkenbodemdruk']},
+          {l:'Cooling-down',t:'cd',i:['5 min wandelen','Kuitstretch 60sec per been','Tibialis stretch']},
+          {l:'⚡ Fallback bij scheenpijn',t:'warn',i:['Vervang run/walk door: 25 min BikeErg + 10 min SkiErg','Zelfde cardiobelasting, nul schenenrisico','Geen concessie — volgende week opnieuw proberen']}],
+        run:[{k:'tempo',l:'Looptempo /km'},{k:'gevoel',l:'Gevoel (1–5)'},{k:'schenen',l:'Schenen ok? (j/n)'}],kracht:[]},
+      {id:'w7-za',day:'Weekend',date:'25 jul',name:'Krachtssessie B',type:'kracht',
+        blocks:[{l:'Sessie B · 45 min',t:'main',i:['Goblet Squat 4×12','RDL 4×10','1-arm Row 3×10','Wallball 3×10','Push-up 3×10','Reverse Lunge 3×10/been']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'squat',l:'Squat'},{k:'rdl',l:'RDL'}]}
+    ]},
+  {id:'w8',num:'Week 8',title:'Run/Walk — 2 min lopen',dates:'27 jul – 2 aug',phase:'Fase 2',pc:'rgba(124,58,237,0.1)',ptc:'#7c3aed',
+    sessions:[
+      {id:'w8-wo',day:'Door de week',date:'29 jul',name:'Run/Walk progressie',type:'run',
+        blocks:[
+          {l:'Warming-up · 5 min',t:'wu',i:['5 min wandelen','Tibialis raises']},
+          {l:'Run/Walk · 22 min',t:'main',i:['2 min lopen → 2 min wandelen','Herhaal 5–6× (totaal 22 min)','Tempo: rustig, geen hijgen']},
+          {l:'Cooling-down',t:'cd',i:['5 min wandelen','Kuitstretch + tibialis']},{'l':'⚡ Fallback bij scheenpijn','t':'warn','i':['Vervang lopen door BikeErg + SkiErg zelfde duur','Nul schenenrisico — aerobe basis blijft intact','Volgende week opnieuw proberen']}],
+        run:[{k:'tempo',l:'Looptempo /km'},{k:'gevoel',l:'Gevoel (1–5)'},{k:'schenen',l:'Schenen ok?'}],kracht:[]},
+      {id:'w8-za',day:'Weekend',date:'1 aug',name:'Krachtssessie B',type:'kracht',
+        blocks:[{l:'Sessie B · 45 min',t:'main',i:['Goblet Squat 4×12','KB Swing intro 3×10','Wallball 3×10','Push-up 3×12','RDL 4×10']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'squat',l:'Squat'},{k:'kb',l:'KB Swing'}]}
+    ]},
+  {id:'w9',num:'Week 9',title:'Run/Walk — 3 min lopen',dates:'3–9 aug',phase:'Fase 2',pc:'rgba(124,58,237,0.1)',ptc:'#7c3aed',
+    sessions:[
+      {id:'w9-wo',day:'Door de week',date:'5 aug',name:'Run/Walk progressie',type:'run',
+        blocks:[
+          {l:'Run/Walk · 24 min',t:'main',i:['3 min lopen → 2 min wandelen','Herhaal 4–5×','Tempo stabiel houden — niet versnellen als je je goed voelt']}],
+        run:[{k:'tempo',l:'Looptempo /km'},{k:'gevoel',l:'Gevoel (1–5)'},{k:'schenen',l:'Schenen ok?'}],kracht:[]},
+      {id:'w9-za',day:'Weekend',date:'8 aug',name:'Krachtssessie B',type:'kracht',
+        blocks:[{l:'Sessie B · 50 min',t:'main',i:['Goblet Squat 4×12','KB Swing 3×15','Wallball 3×12','Push-up 3×12','Lunge dumbbells 3×10/been']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'squat',l:'Squat'},{k:'kb',l:'KB Swing'},{k:'wb',l:'Wallball (kg)'}]}
+    ]},
+  {id:'w10',num:'Week 10',title:'Run/Walk — 5 min lopen',dates:'10–16 aug',phase:'Fase 2',pc:'rgba(124,58,237,0.1)',ptc:'#7c3aed',
+    sessions:[
+      {id:'w10-wo',day:'Door de week',date:'12 aug',name:'Run/Walk progressie',type:'run',
+        blocks:[
+          {l:'Run/Walk · 25 min',t:'main',i:['5 min lopen → 2 min wandelen','Herhaal 3×','Je loopt nu meer dan je wandelt!']}],
+        run:[{k:'tempo',l:'Looptempo /km'},{k:'gevoel',l:'Gevoel (1–5)'},{k:'schenen',l:'Schenen ok?'}],kracht:[]},
+      {id:'w10-za',day:'Weekend',date:'15 aug',name:'Krachtssessie C intro',type:'kracht',
+        blocks:[{l:'Sessie C intro · 50 min',t:'main',i:['Wallball 4×10','KB Swing 4×15','Goblet Squat 4×12','Burpee (geen sprong) 3×5','RDL 4×10']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'wb',l:'Wallball (kg)'},{k:'kb',l:'KB Swing'}]}
+    ]},
+  {id:'w11',num:'Week 11',title:'Run/Walk — 8 min lopen',dates:'17–23 aug',phase:'Fase 2',pc:'rgba(124,58,237,0.1)',ptc:'#7c3aed',
+    sessions:[
+      {id:'w11-wo',day:'Door de week',date:'19 aug',name:'Run/Walk opbouw',type:'run',
+        blocks:[
+          {l:'Run/Walk · 28 min',t:'main',i:['8 min lopen → 2 min wandelen','Herhaal 2–3×','Tempo: 6:00–6:30/km is perfect']}],
+        run:[{k:'tempo',l:'Looptempo /km'},{k:'gevoel',l:'Gevoel (1–5)'},{k:'schenen',l:'Schenen ok?'}],kracht:[]},
+      {id:'w11-za',day:'Weekend',date:'22 aug',name:'Krachtssessie C',type:'kracht',
+        blocks:[{l:'Sessie C · 55 min',t:'main',i:['Wallball 4×12','KB Swing 4×15','Goblet Squat 4×12','Burpee broad jump 3×5','Push-up 3×12','Farmers carry 3×20m']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'wb',l:'Wallball (kg)'},{k:'kb',l:'KB Swing'},{k:'farmers',l:'Farmers (kg/hand)'}]}
+    ]},
+  {id:'w12',num:'Week 12',title:'Run/Walk — 12 min lopen',dates:'24–30 aug',phase:'Fase 2',pc:'rgba(124,58,237,0.1)',ptc:'#7c3aed',
+    sessions:[
+      {id:'w12-wo',day:'Door de week',date:'26 aug',name:'Run/Walk grote stap',type:'run',
+        blocks:[
+          {l:'Run/Walk · 30 min',t:'main',i:['12 min lopen → 2 min wandelen','Herhaal 2×','Bijna continu aan het lopen!']}],
+        run:[{k:'tempo',l:'Looptempo /km'},{k:'gevoel',l:'Gevoel (1–5)'},{k:'schenen',l:'Schenen ok?'}],kracht:[]},
+      {id:'w12-za',day:'Weekend',date:'29 aug',name:'Krachtssessie C',type:'kracht',
+        blocks:[{l:'Sessie C · 55 min',t:'main',i:['Wallball 4×15','KB Swing 4×20','Lungebag carry 3×20m','Burpee broad jump 3×8','Push-up 3×15']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'wb',l:'Wallball (kg)'},{k:'lb',l:'Lungebag (kg)'}]}
+    ]},
+  {id:'w13',num:'Week 13',title:'Eerste volledige kilometers',dates:'31 aug – 6 sep',phase:'Fase 2',pc:'rgba(124,58,237,0.1)',ptc:'#7c3aed',
+    sessions:[
+      {id:'w13-wo',day:'Door de week',date:'2 sep',name:'Bijna doorlopen',type:'run',
+        blocks:[
+          {l:'Run · 30 min',t:'main',i:['20 min doorlopen @ 6:00–6:30/km','2 min wandelen als nodig','Dan weer 10 min lopen']}],
+        run:[{k:'tempo',l:'Looptempo /km'},{k:'afstand',l:'Afstand (km)'},{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]},
+      {id:'w13-za',day:'Weekend',date:'5 sep',name:'Krachtssessie C',type:'kracht',
+        blocks:[{l:'Sessie C · 55 min',t:'main',i:['Wallball 4×15','KB Swing 4×20','Goblet Squat 4×15','Farmers carry 4×20m','Burpee broad jump 3×8']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'wb',l:'Wallball (kg)'},{k:'kb',l:'KB Swing'},{k:'farmers',l:'Farmers (kg/hand)'}]}
+    ]},
+  {id:'w14',num:'Week 14',title:'Doorlopen!',dates:'7–13 sep',phase:'Fase 2',pc:'rgba(124,58,237,0.1)',ptc:'#7c3aed',
+    sessions:[
+      {id:'w14-wo',day:'Door de week',date:'9 sep',name:'Eerste volledige run',type:'run',
+        blocks:[
+          {l:'Run · 25 min doorlopen',t:'main',i:['25 min @ 6:00/km doorlopen','Geen wandelstops meer','Dit is een mijlpaal!']}],
+        run:[{k:'tempo',l:'Looptempo /km'},{k:'afstand',l:'Afstand (km)'},{k:'gevoel',l:'Gevoel (1–5)'},{k:'schenen',l:'Schenen ok?'}],kracht:[]},
+      {id:'w14-za',day:'Weekend',date:'12 sep',name:'Krachtssessie C',type:'kracht',
+        blocks:[{l:'Sessie C · 60 min',t:'main',i:['Volledige sessie C','Alle Hyrox stations geoefend','Plank als bekkenbodem ok']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'wb',l:'Wallball'},{k:'kb',l:'KB Swing'},{k:'farmers',l:'Farmers'}]}
+    ]},
+
+  // FASE 3: Loopopbouw (weken 15-20)
+  {id:'w15',num:'Week 15',title:'Loopvolume opbouwen',dates:'14–20 sep',phase:'Fase 3',pc:'rgba(22,128,60,0.1)',ptc:'#16803c',
+    sessions:[
+      {id:'w15-wo',day:'Door de week',date:'16 sep',name:'Run 30 min @ 5:45/km',type:'run',
+        blocks:[
+          {l:'Warming-up',t:'wu',i:['5 min wandelen','Tibialis raises 2×15']},
+          {l:'Run · 30 min',t:'main',i:['30 min doorlopen @ 5:45/km','Steady, niet te snel starten']},
+          {l:'Cooling-down',t:'cd',i:['5 min wandelen','Kuitstretch + tibialis']}],
+        run:[{k:'tempo',l:'Gem. tempo /km'},{k:'afstand',l:'Afstand (km)'},{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]},
+      {id:'w15-za',day:'Weekend',date:'19 sep',name:'Krachtssessie C + Hyrox combo',type:'kracht',
+        blocks:[
+          {l:'Kracht + combo · 60 min',t:'main',i:['Wallball 4×15','KB Swing 4×20','Dan direct: 5 min lopen @ 5:30/km','Farmers carry 3×20m','Dan direct: 5 min lopen','Burpee broad jump 3×8']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'wb',l:'Wallball'},{k:'kb',l:'KB Swing'}]}
+    ]},
+  {id:'w16',num:'Week 16',title:'Tempo iets hoger',dates:'21–27 sep',phase:'Fase 3',pc:'rgba(22,128,60,0.1)',ptc:'#16803c',
+    sessions:[
+      {id:'w16-wo',day:'Door de week',date:'23 sep',name:'Run 35 min',type:'run',
+        blocks:[
+          {l:'Run · 35 min',t:'main',i:['35 min @ 5:30/km','Km 1: altijd rustig starten @ 6:00/km','Dan naar 5:30/km']}],
+        run:[{k:'tempo',l:'Gem. tempo /km'},{k:'afstand',l:'Afstand (km)'},{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]},
+      {id:'w16-za',day:'Weekend',date:'26 sep',name:'Krachtssessie C',type:'kracht',
+        blocks:[{l:'Sessie C · 60 min',t:'main',i:['Volledige sessie C','Gewichten iets verhogen waar mogelijk']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'wb',l:'Wallball'},{k:'kb',l:'KB Swing'},{k:'farmers',l:'Farmers'}]}
+    ]},
+  {id:'w17',num:'Week 17',title:'Eerste km-splits oefenen',dates:'28 sep – 4 okt',phase:'Fase 3',pc:'rgba(22,128,60,0.1)',ptc:'#16803c',
+    sessions:[
+      {id:'w17-wo',day:'Door de week',date:'30 sep',name:'Interval run 1km',type:'run',
+        blocks:[
+          {l:'Warming-up',t:'wu',i:['10 min easy @ 6:30/km']},
+          {l:'Intervals · 20 min',t:'main',i:['4× 1km @ 5:30/km','2 min wandelen tussen elke km','Race simulatie Hyrox loopstuk']},
+          {l:'Cooling-down',t:'cd',i:['5 min wandelen','Kuitprotocol']}],
+        run:[{k:'tempo',l:'Gem. tempo /km'},{k:'gevoel',l:'Gevoel (1–5)'},{k:'schenen',l:'Schenen ok?'}],kracht:[]},
+      {id:'w17-za',day:'Weekend',date:'3 okt',name:'Krachtssessie C + stations',type:'kracht',
+        blocks:[{l:'Hyrox stations combo · 60 min',t:'main',i:['Wallball 4×15','KB Swing 4×20','Farmers carry 3×20m','Burpee broad jump 3×8','Sandbag lunge 3×10/been']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'wb',l:'Wallball'},{k:'farmers',l:'Farmers'},{k:'sb',l:'Sandbag (kg)'}]}
+    ]},
+  {id:'w18',num:'Week 18',title:'Langere run',dates:'5–11 okt',phase:'Fase 3',pc:'rgba(22,128,60,0.1)',ptc:'#16803c',
+    sessions:[
+      {id:'w18-wo',day:'Door de week',date:'7 okt',name:'Run 40 min @ 5:30/km',type:'run',
+        blocks:[
+          {l:'Run · 40 min',t:'main',i:['40 min @ 5:30/km doorlopen','Neg. split: eerste helft 5:45, tweede 5:15']}],
+        run:[{k:'tempo',l:'Gem. tempo /km'},{k:'afstand',l:'Afstand (km)'},{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]},
+      {id:'w18-za',day:'Weekend',date:'10 okt',name:'Krachtssessie C',type:'kracht',
+        blocks:[{l:'Sessie C · 60 min',t:'main',i:['Volledige sessie C','Focus op Hyrox stations tempo']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'wb',l:'Wallball'},{k:'kb',l:'KB Swing'}]}
+    ]},
+  {id:'w19',num:'Week 19',title:'Race simulatie 1',dates:'12–18 okt',phase:'Fase 3',pc:'rgba(22,128,60,0.1)',ptc:'#16803c',
+    sessions:[
+      {id:'w19-wo',day:'Door de week',date:'14 okt',name:'Hyrox Simulatie',type:'run',
+        blocks:[
+          {l:'Race simulatie · 45 min',t:'main',i:['3 rondes van: 1km lopen @ 5:30 + 1 station','Station 1: Wallball 20 reps','Station 2: Burpee broad jump 20m','Station 3: Farmers carry 30m','Geen rust tussen lopen en station']}],
+        run:[{k:'tempo',l:'Loop tempo /km'},{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]},
+      {id:'w19-za',day:'Weekend',date:'17 okt',name:'Krachtssessie C',type:'kracht',
+        blocks:[{l:'Sessie C · 55 min',t:'main',i:['Volledige sessie C','Iets lichter na simulatie']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'wb',l:'Wallball'},{k:'kb',l:'KB Swing'}]}
+    ]},
+  {id:'w20',num:'Week 20',title:'Herstelweek',dates:'19–25 okt',phase:'Fase 3',pc:'rgba(22,128,60,0.1)',ptc:'#16803c',
+    sessions:[
+      {id:'w20-wo',day:'Door de week',date:'21 okt',name:'Easy run 25 min',type:'run',
+        blocks:[{l:'Easy run',t:'main',i:['25 min @ 6:00/km','Rustig, herstelrun']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]},
+      {id:'w20-za',day:'Weekend',date:'24 okt',name:'Lichte kracht',type:'kracht',
+        blocks:[{l:'Licht · 40 min',t:'main',i:['Sessie B niveau','Geen maximale inspanning','Lichaam laten herstellen']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]}
+    ]},
+
+  // FASE 4: Race prep (weken 21-24)
+  {id:'w21',num:'Week 21',title:'Race Prep — Intensiteit omhoog',dates:'26 okt – 1 nov',phase:'Fase 4',pc:'rgba(161,98,7,0.1)',ptc:'#a16207',
+    sessions:[
+      {id:'w21-wo',day:'Door de week',date:'28 okt',name:'Run 6× 1km @ 5:15/km',type:'run',
+        blocks:[
+          {l:'Warming-up',t:'wu',i:['10 min easy']},
+          {l:'Intervals',t:'main',i:['6× 1km @ 5:15/km','2 min wandelen tussen km','Race pace oefenen']},
+          {l:'Cooling-down',t:'cd',i:['5 min wandelen','Kuitprotocol']}],
+        run:[{k:'tempo',l:'Gem. interval tempo'},{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]},
+      {id:'w21-za',day:'Weekend',date:'31 okt',name:'Hyrox Simulatie 2',type:'kracht',
+        blocks:[
+          {l:'Volledige simulatie · 60 min',t:'main',i:['5 rondes: 1km lopen @ 5:30 + 1 station','Stations: Wallball / Burpee / Farmers / KB Swing / Sandbag','Beslis wie welk station doet (voorbereiding race)']}],
+        run:[{k:'tempo',l:'Loop tempo /km'},{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]}
+    ]},
+  {id:'w22',num:'Week 22',title:'Race Prep — Volume',dates:'2–8 nov',phase:'Fase 4',pc:'rgba(161,98,7,0.1)',ptc:'#a16207',
+    sessions:[
+      {id:'w22-wo',day:'Door de week',date:'4 nov',name:'Run 45 min @ 5:30/km',type:'run',
+        blocks:[{l:'Run · 45 min',t:'main',i:['45 min @ 5:30/km','Langste run van het seizoen','Negatieve split: rustig starten']}],
+        run:[{k:'tempo',l:'Gem. tempo /km'},{k:'afstand',l:'Afstand (km)'},{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]},
+      {id:'w22-za',day:'Weekend',date:'7 nov',name:'Krachtssessie C (laatste zwaar)',type:'kracht',
+        blocks:[{l:'Laatste zware kracht · 55 min',t:'main',i:['Volledige sessie C','Maximale inspanning — daarna taper']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[{k:'wb',l:'Wallball'},{k:'kb',l:'KB Swing'},{k:'farmers',l:'Farmers'}]}
+    ]},
+  {id:'w23',num:'Week 23',title:'Taper — Volume omlaag',dates:'9–15 nov',phase:'Fase 4',pc:'rgba(161,98,7,0.1)',ptc:'#a16207',
+    sessions:[
+      {id:'w23-wo',day:'Door de week',date:'11 nov',name:'Run 25 min + strides',type:'run',
+        blocks:[
+          {l:'Run · 25 min',t:'main',i:['20 min @ 5:30/km','4× 60m strides op het einde','Benen scherp houden']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]},
+      {id:'w23-za',day:'Weekend',date:'14 nov',name:'Lichte activatie',type:'kracht',
+        blocks:[{l:'Activatie · 30 min',t:'main',i:['Wallball 3×10 (licht)','KB Swing 3×10','Mobiliteit en stretching']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]}
+    ]},
+  {id:'w24',num:'Week 24',title:'Race Week — 28 november',dates:'16–28 nov',phase:'Fase 4',pc:'rgba(161,98,7,0.1)',ptc:'#a16207',
+    sessions:[
+      {id:'w24-wo',day:'Door de week',date:'18 nov',name:'Easy run 15 min',type:'run',
+        blocks:[{l:'Easy',t:'main',i:['15 min rustig joggen','Geen inspanning','Benen fris houden']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]},
+      {id:'w24-vr',day:'Vrijdag',date:'26 nov',name:'Pre-race activatie',type:'run',
+        blocks:[
+          {l:'Activatie · 20 min',t:'wu',i:['10 min wandelen','4× 60m strides oplopend','Laatste tot race tempo']}],
+        run:[{k:'gevoel',l:'Gevoel (1–5)'}],kracht:[]},
+      {id:'w24-za',day:'Zaterdag',date:'28 nov',name:'🏋 HYROX MIXED DOUBLES RACE',type:'race',
+        blocks:[
+          {l:'Race warm-up',t:'wu',i:['10 min wandelen + rustig joggen','2× strides','Stations strategie afstemmen']},
+          {l:'Race doel',t:'main',i:['Finishen met plezier!','Loop tempo: 5:30–6:00/km','Stations eerlijk verdeeld','Rustig beginnen — km 1 op 6:00/km']}],
+        run:[{k:'eindtijd',l:'Eindtijd'},{k:'tempo',l:'Gem. looptempo /km'},{k:'positie',l:'Eindpositie'}],kracht:[]}
+    ]}
+];
+
+// ── STORAGE ───────────────────────────────────────────────────────────────────
+const KEY='hyrox_mixed';
+function tLoad(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch(e){return{};}}
+function tSave(d){localStorage.setItem(KEY,JSON.stringify(d));showSaved();}
+function showSaved(){const el=document.getElementById('t-saved');if(!el)return;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2000);}
+function tField(sid,k,v){const d=tLoad();if(!d[sid])d[sid]={};d[sid][k]=v;tSave(d);}
+function liEdit(key,sid){
+  document.querySelectorAll('.li-edit-wrap').forEach(el=>{if(el.id!=='lwrap-'+key)el.style.display='none';});
+  document.querySelectorAll('.li-display').forEach(el=>{if(el.id!=='ldsp-'+key)el.style.display='';});
+  const wrap=document.getElementById('lwrap-'+key);
+  const disp=document.getElementById('ldsp-'+key);
+  if(!wrap||!disp)return;
+  disp.style.display='none';wrap.style.display='flex';
+  const inp=document.getElementById('linp-'+key);if(inp){inp.focus();inp.select();}
+}
+function liCheck(key,sid,el){
+  const d=tLoad();if(!d[sid])d[sid]={};
+  const val=!d[sid][key];
+  d[sid][key]=val;tSave(d);
+  el.classList.toggle('done',val);
+  const li=el.closest('li');if(li)li.classList.toggle('li-done',val);
+}
+function liSave(key,sid,val){
+  const disp=document.getElementById('ldsp-'+key);
+  if(disp){disp.textContent=val||'–';disp.className='li-display'+(val?' filled':'');}
+  tField(sid,key,val);
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.li-edit-wrap')&&!e.target.closest('.li-display')){
+    document.querySelectorAll('.li-edit-wrap').forEach(el=>el.style.display='none');
+    document.querySelectorAll('.li-display').forEach(el=>el.style.display='');
+  }
+});
+function tToggleDone(sid){const d=tLoad();if(!d[sid])d[sid]={};d[sid].done=!d[sid].done;tSave(d);tRender();}
+function tSetRating(sid,v){const d=tLoad();if(!d[sid])d[sid]={};d[sid].rating=v;tSave(d);tRender();}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function tRender(){
+  const c=document.getElementById('t-weeks');if(!c)return;
+  const d=tLoad();
+  let tot=0,done=0,runs=0,kracht=0,wdone=0;
+  c.innerHTML='';
+  WEEKS.forEach(w=>{
+    const wDone=w.sessions.length>0&&w.sessions.every(s=>d[s.id]?.done);
+    if(wDone)wdone++;
+    const cnt=w.sessions.filter(s=>d[s.id]?.done).length;
+    tot+=w.sessions.length;done+=cnt;
+    w.sessions.forEach(s=>{if(d[s.id]?.done){if(s.type==='kracht')kracht++;else runs++;}});
+    const el=document.createElement('div');el.className='t-week';
+    el.innerHTML=`
+      <div class="t-week-header" onclick="tToggleWeek('twb-${w.id}','twc-${w.id}')">
+        <span class="t-week-num">${w.num}</span>
+        <span class="t-week-title">${w.title}</span>
+        <span class="t-week-phase" style="background:${w.pc};color:${w.ptc};border:1px solid ${w.ptc}40">${w.phase}</span>
+        <span class="t-week-dates">${w.dates}</span>
+        ${wDone?'<span class="t-week-done">✓</span>':`<span class="t-week-cnt">${cnt}/${w.sessions.length}</span>`}
+        <span class="t-week-chev" id="twc-${w.id}">▶</span>
+      </div>
+      <div class="t-week-body" id="twb-${w.id}">${w.sessions.map(s=>renderSess(s,d[s.id]||{})).join('')}</div>`;
+    c.appendChild(el);
+  });
+  const pct=tot?Math.round(done/tot*100):0;
+  const pf=document.getElementById('t-pfill');const pl=document.getElementById('t-ppct');
+  if(pf)pf.style.width=pct+'%';if(pl)pl.textContent=pct+'%';
+  ['t-sdone','t-stot','t-sruns','t-skracht','t-sstreak'].forEach((id,i)=>{
+    const el=document.getElementById(id);if(el)el.textContent=[done,tot,runs,kracht,wdone][i];
+  });
+}
+
+function renderSess(s,d){
+  const done=d.done||false;
+  const dc={run:'t-dot-run',kracht:'t-dot-kracht',race:'t-dot-race'}[s.type]||'t-dot-mob';
+  const btm={wu:'wu',main:'main',cd:'cd',kb:'kb',warn:'warn'};
+  function needsInput(b,item){
+    // Kracht: items met sets×reps patroon (bijv. "Wallball 4×15", "KB Swing 3×20")
+    if(/\d[×x]\d/.test(item) && s.type==='kracht') return true;
+    // Run: hoofdwerk van run sessies
+    if(b.t==='main' && (s.type==='run'||s.type==='run2'||s.type==='race')) return true;
+    return false;
+  }
+  function inputUnit(b,item){
+    if(s.type==='kracht') return 'kg';
+    return '/km';
+  }
+  function inputKey(sid,bi,ii){return `_v_${sid}_${bi}_${ii}`;}
+  const blocks=s.blocks.map((b,bi)=>{
+    const items=b.i.map((item,ii)=>{
+      const key=inputKey(s.id,bi,ii);
+      const val=d[key]||'';
+      if(needsInput(b,item)){
+        const unit=inputUnit(b,item);
+        const ck2=inputKey(s.id,bi,ii)+'_ck';const ckDone2=d[ck2]||false;
+        return `<li class="li-inp-row ${ckDone2?'li-done':''}">
+          <div class="li-check ${ckDone2?'done':''}" onclick="liCheck('${ck2}','${s.id}',this)"></div>
+          <span class="li-name">${item}</span>
+          <span class="li-display ${val?'filled':''}" id="ldsp-${key}" onclick="liEdit('${key}','${s.id}')">${val||'–'}</span>
+          <div class="li-edit-wrap" id="lwrap-${key}" style="display:none">
+            <input class="li-inp" id="linp-${key}" value="${val}" placeholder="–"
+              onchange="liSave('${key}','${s.id}',this.value)"
+              onkeydown="if(event.key==='Enter'||event.key==='Tab'){liSave('${key}','${s.id}',this.value);this.closest('.li-edit-wrap').style.display='none';document.getElementById('ldsp-${key}').style.display=''}">
+            <span class="li-unit">${unit}</span>
+            <span class="li-ok" onclick="liSave('${key}','${s.id}',document.getElementById('linp-${key}').value);document.getElementById('lwrap-${key}').style.display='none';document.getElementById('ldsp-${key}').style.display=''">✓</span>
+          </div>
+        </li>`;
+      }
+      const ck=inputKey(s.id,bi,ii)+'_ck';const ckDone=d[ck]||false;
+      return `<li class="${ckDone?'li-done':''}">
+        <div class="li-check ${ckDone?'done':''}" onclick="liCheck('${ck}','${s.id}',this)"></div>
+        <span class="li-name">${item}</span>
+      </li>`;
+    }).join('');
+    return `<div class="t-block ${btm[b.t]||'main'}"><div class="t-block-label">${b.l}</div><ul>${items}</ul></div>`;
+  }).join('');
+  const rating=d.rating||0;
+  const stars=[1,2,3,4,5].map(i=>`<span class="t-star ${i<=rating?'on':''}" onclick="tSetRating('${s.id}',${i})">★</span>`).join('');
+  return `
+    <div class="t-session">
+      <div class="t-session-header">
+        <div class="t-dot ${dc}"></div>
+        <span class="t-session-when"><strong>${s.day}</strong><br>${s.date}</span>
+        <span class="t-session-name">${s.name}</span>
+        <span class="t-feel-label">Gevoel:</span>
+        <div class="t-stars">${stars}</div>
+        <button class="t-expand-btn" onclick="tToggleDetail('td-${s.id}',this)">Notities ▾</button>
+        <div class="t-check ${done?'done':''}" onclick="tToggleDone('${s.id}')"></div>
+      </div>
+      <div class="t-session-workout">
+        <div class="t-blocks">${blocks}</div>
+      </div>
+      <div class="t-detail" id="td-${s.id}">
+        <div class="t-inputs-title">Notities</div>
+        <textarea class="t-notes" placeholder="Hoe voelde het?" onchange="tField('${s.id}','notes',this.value)">${d.notes||''}</textarea>
+      </div>
+    </div>`;
+}
+
+// ── INTERACTIONS ──────────────────────────────────────────────────────────────
+function tToggleWeek(bid,cid){
+  const b=document.getElementById(bid),c=document.getElementById(cid);
+  if(!b||!c)return;
+  const o=b.classList.toggle('open');c.classList.toggle('open',o);
+}
+function tToggleDetail(id,btn){
+  const el=document.getElementById(id);if(!el)return;
+  const o=el.classList.toggle('open');
+  btn.textContent=o?'Data ▴':'Data ▾';
+}
+function toggleSec(id,chevId){
+  const b=document.getElementById(id),c=document.getElementById(chevId);
+  if(!b||!c)return;
+  const o=b.classList.toggle('open');c.classList.toggle('open',o);
+}
+function toggleKD(id,chevId){
+  const b=document.getElementById(id),c=document.getElementById(chevId);
+  if(!b||!c)return;
+  const o=b.classList.toggle('open');c.classList.toggle('open',o);
+}
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  const page=document.getElementById(id);if(page)page.classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='schema')tRender();
+}
+function tExport(){
+  const data={exported:new Date().toISOString(),sessions:tLoad()};
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
+  a.download='hyrox-mixed-tracker.json';a.click();
+}
+function tImport(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{try{const imp=JSON.parse(ev.target.result);if(imp.sessions)tSave(imp.sessions);tRender();}catch(err){alert('Ongeldig bestand.');}};
+  r.readAsText(f);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  tRender();
+  const firstTab=document.querySelector('.tab');
+  if(firstTab)firstTab.classList.add('on');
+});
+</script>
+</body>
+</html>
